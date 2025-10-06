@@ -1,0 +1,80 @@
+/* The main container card */
+.proactive-card {
+  /* Constraint 1: Make it not as wide */
+  max-width: 550px; 
+  width: 100%;
+  /* Center the card if the parent allows */
+  margin: 40px auto; 
+  
+  /* Visual Polish */
+  background-color: var(--pa-bg-color);
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  font-family: var(--pa-font-family);
+  color: var(--pa-text-main);
+}
+
+/* Heading Styles */
+.card-title {
+  margin-top: 0;
+  margin-bottom: 24px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--pa-text-bold);
+  border-bottom: 1px solid #eee;
+  padding-bottom: 16px;
+}
+
+/* Reset the list styles */
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  /* Use flexbox gap for spacing between items */
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Individual List Item */
+.feature-item {
+  display: flex;
+  align-items: flex-start; /* Aligns icon with top of text */
+  gap: 16px; /* Space between emoji and text */
+}
+
+/* The Emoji Icon */
+.feature-icon {
+  font-size: 1.6rem; /* Make emojis slightly larger */
+  line-height: 1;
+  flex-shrink: 0; /* Ensures emoji doesn't get squished */
+  margin-top: 2px; /* Optical alignment with text */
+}
+
+/* The Text Container */
+.feature-text {
+  line-height: 1.6; /* Better readability */
+  font-size: 0.95rem;
+}
+
+/* The Bold Titles */
+.feature-text strong {
+  display: block; /* Puts the bold text on its own line */
+  color: var(--pa-text-bold);
+  font-weight: 600;
+  margin-bottom: 4px;
+  font-size: 1.05rem;
+}
+
+/* Optional: Dark mode support if your surrounding app is dark */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --pa-bg-color: #1f2937;
+    --pa-text-main: #d1d5db;
+    --pa-text-bold: #f9fafb;
+  }
+  .card-title {
+    border-bottom-color: #374151;
+  }
+}

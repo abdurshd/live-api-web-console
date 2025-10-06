@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
+import cn from "classnames";
 import { useRef, useState } from "react";
 import "./App.scss";
-import { LiveAPIProvider } from "./contexts/LiveAPIContext";
-import SidePanel from "./components/side-panel/SidePanel";
-import { Altair } from "./components/altair/Altair";
 import ControlTray from "./components/control-tray/ControlTray";
-import cn from "classnames";
+import { ProactiveAudio } from "./components/proactive-audio/ProactiveAudio";
+import SidePanel from "./components/side-panel/SidePanel";
+import { LiveAPIProvider } from "./contexts/LiveAPIContext";
 import { LiveClientOptions } from "./types";
 
 const API_KEY = process.env.REACT_APP_GEMINI_API_KEY as string;
@@ -30,6 +30,7 @@ if (typeof API_KEY !== "string") {
 
 const apiOptions: LiveClientOptions = {
   apiKey: API_KEY,
+  httpOptions: { "apiVersion": "v1alpha"}
 };
 
 function App() {
@@ -47,7 +48,7 @@ function App() {
           <main>
             <div className="main-app-area">
               {/* APP goes here */}
-              <Altair />
+              <ProactiveAudio />
               <video
                 className={cn("stream", {
                   hidden: !videoRef.current || !videoStream,

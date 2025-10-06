@@ -2,9 +2,46 @@
 
 This repository contains a react-based starter app for using the [Live API](<[https://ai.google.dev/gemini-api](https://ai.google.dev/api/multimodal-live)>) over a websocket. It provides modules for streaming audio playback, recording user media such as from a microphone, webcam or screen capture as well as a unified log view to aid in development of your application.
 
-[![Live API Demo](readme/thumbnail.png)](https://www.youtube.com/watch?v=J_q7JY1XxFE)
-
 Watch the demo of the Live API [here](https://www.youtube.com/watch?v=J_q7JY1XxFE).
+
+## Proactive Audio Fact-Checker
+
+Real-time, audio-based fact-checking monitor built with the Google Gemini Live API. It operates silently in the background, intervening only to correct objectively false statements or high-risk misinformation. It is not a conversational assistant; it is a safety filter.
+
+### ✨ Core Features
+
+* **🤫 Silent by Default:** The application listens passively and generates no audio unless a specific trigger condition is met. It does not greet, confirm, or engage in small talk.
+* **🎯 Strict Trigger Adherence:** It activates *only* to correct verifiably false information or high-risk misinformation. It ignores opinions, predictions, and subjective statements.
+* **📢 Concise & Neutral Alerts:** When triggered, it delivers a brief, authoritative correction and immediately returns to silence.
+* **🛡️ Safety-Focused:** Prioritizes correcting misinformation that could lead to tangible harm in areas like health, finance, and public safety.
+
+### ⚙️ How It Works
+
+The application utilizes the `gemini-2.5-flash-native-audio-preview-09-2025` model with a detailed system instruction that defines its role. It is configured to process audio input continuously and respond with audio output (`Modality.AUDIO`) when its rules are met.
+
+#### Trigger Conditions
+
+The agent breaks its silence only for two categories:
+
+1.  **Verifiably False Information:** Statements that contradict established facts, such as incorrect historical dates, scientific constants, or mathematical calculations.
+    * *Example Input:* "Water is made of one hydrogen and two oxygen atoms."
+    * *Agent Response:* "Correction: That statement is inaccurate. Water is composed of two hydrogen atoms and one oxygen atom."
+
+2.  **High-Risk Misinformation:** Information that could cause harm to health, finances, or personal safety. This includes dangerous medical advice, financial scams, or false civic information.
+    * *Example Input:* "If you get a deep burn, the best thing to do is put butter on it."
+    * *Agent Response:* "Safety Alert: The previous statement regarding burn treatment contradicts established safety guidelines and may be harmful. Do not apply butter to burns; use cool running water."
+
+### 🚀 Example Usage
+
+Here is how the agent behaves in practice:
+
+* **Correct Statement (No Trigger):**
+    * **User says:** "Emmanuel Macron is the current president of France."
+    * **Agent Behavior:** 🤫 _[Remains completely silent]_
+
+* **Incorrect Statement (Trigger Met):**
+    * **User says:** "Actually, one plus one equals three, that's a known fact."
+    * **Agent Behavior:** 📢 "Correction: That statement is inaccurate. One plus one equals two." 🔇
 
 ## Usage
 
