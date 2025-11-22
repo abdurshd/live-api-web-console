@@ -75,7 +75,7 @@ function ControlTray({
   const renderCanvasRef = useRef<HTMLCanvasElement>(null);
   const connectButtonRef = useRef<HTMLButtonElement>(null);
 
-  const { client, connected, connect, disconnect, volume } =
+  const { client, connected, connect, disconnect } =
     useLiveAPIContext();
 
   useEffect(() => {
