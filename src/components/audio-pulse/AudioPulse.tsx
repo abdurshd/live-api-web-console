@@ -19,7 +19,7 @@ import React from "react";
 import { useEffect, useRef } from "react";
 import c from "classnames";
 
-const lineCount = 3;
+const lineCount = 5;
 
 export type AudioPulseProps = {
   active: boolean;
@@ -33,14 +33,41 @@ export default function AudioPulse({ active, volume, hover }: AudioPulseProps) {
   useEffect(() => {
     let timeout: number | null = null;
     const update = () => {
-      lines.current.forEach(
-        (line, i) =>
-        (line.style.height = `${Math.min(
-          24,
-          4 + volume * (i === 1 ? 400 : 60),
-        )}px`),
-      );
-      timeout = window.setTimeout(update, 100);
+      lines.current.forEach((line, i) => {
+        // Dynamic visualization
+        // Center bars are generally taller/more active
+        // Add some randomness for "aliveness" when active
+        const noise = Math.random() * 0.2; 
+        
+        // Scale volume to be more responsive (log-ish or just boosted)
+        const v = Math.min(1, volume * 2.5); 
+        
+        // Use 5 bars
+        // 0, 4: Outer
+        // 1, 3: Middle
+        // 2: Center
+        
+        let targetHeight = 4; // Min height
+        
+        if (volume > 0.01) {
+            const baseHeight = 6;
+            const maxHeight = 28;
+            
+            if (i === 2) { // Center
+                targetHeight = baseHeight + (v * (maxHeight - baseHeight));
+            } else if (i === 1 || i === 3) { // Middle
+                targetHeight = baseHeight + (v * 0.8 * (maxHeight - baseHeight));
+            } else { // Outer
+                targetHeight = baseHeight + (v * 0.5 * (maxHeight - baseHeight));
+            }
+            
+            // Add small jitter
+            targetHeight += (noise * 4);
+        }
+
+        line.style.height = `${Math.min(32, targetHeight)}px`;
+      });
+      timeout = window.setTimeout(update, 30); // Fast update
     };
 
     update();

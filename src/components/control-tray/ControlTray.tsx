@@ -168,8 +168,8 @@ function ControlTray({
           )}
         </button>
 
-        <div className="action-button no-action outlined">
-          <AudioPulse volume={volume} active={connected} hover={false} />
+        <div className="action-button no-action outlined audio-visualizer-button" title="Microphone input level">
+          <AudioPulse volume={inVolume} active={connected && !muted} hover={false} />
         </div>
 
         {supportsVideo && (

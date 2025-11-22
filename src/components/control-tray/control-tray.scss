@@ -100,8 +100,8 @@
 }
 
 .connect-toggle {
-  width: 80px; /* Wider connect button */
-  border-radius: 28px;
+  width: 56px; /* Fully rounded circular button */
+  border-radius: 50%;
   
   &:focus {
     outline: none;
@@ -116,6 +116,31 @@
     &:hover {
        background-color: var(--Blue-400);
     }
+  }
+
+  &.connected {
+    background-color: var(--Red-600);
+    color: white;
+    box-shadow: 0 0 15px rgba(255, 70, 0, 0.4);
+    
+    &:hover {
+      background-color: var(--Red-500);
+    }
+  }
+}
+
+.audio-visualizer-button {
+  width: 56px;
+  height: 56px;
+  min-width: 56px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  .audioPulse {
+    width: 32px;
+    height: 32px;
   }
 }
 
@@ -137,6 +162,12 @@
   z-index: 100;
   max-width: 90vw;
 
+  /* Ensure all direct children align vertically */
+  > * {
+    display: flex;
+    align-items: center;
+  }
+
   .disabled .action-button,
   .action-button.disabled {
     background: rgba(255, 255, 255, 0.03);
@@ -148,25 +179,35 @@
   }
 
   .connection-container {
+    position: relative;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    gap: 4px;
+    justify-content: center;
+    align-self: center; /* Ensure vertical alignment with other buttons */
 
     .connection-button-container {
-        /* Remove container styling, just wrap the button */
+      position: relative;
       background: transparent;
       border: none;
       padding: 0;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .text-indicator {
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      transform: translateX(-50%);
       font-size: 12px;
       font-weight: 500;
       color: var(--Blue-400);
       user-select: none;
       text-shadow: 0 0 10px rgba(31, 148, 255, 0.5);
+      line-height: 1;
+      white-space: nowrap;
     }
 
     &:not(.connected) {
