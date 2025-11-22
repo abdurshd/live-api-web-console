@@ -96,9 +96,13 @@ export default function SidePanel() {
               ...baseStyles,
               background: "var(--Neutral-15)",
               color: "var(--Neutral-90)",
-              minHeight: "33px",
-              maxHeight: "33px",
-              border: 0,
+              minHeight: "36px",
+              border: "1px solid var(--Neutral-20)",
+              borderRadius: "8px",
+              boxShadow: "none",
+              "&:hover": {
+                 border: "1px solid var(--Neutral-30)",
+              }
             }),
             option: (styles, { isFocused, isSelected }) => ({
               ...styles,
@@ -107,7 +111,19 @@ export default function SidePanel() {
                 : isSelected
                   ? "var(--Neutral-20)"
                   : undefined,
+              color: "var(--Neutral-90)",
+              cursor: "pointer",
             }),
+            menu: (styles) => ({
+                ...styles,
+                background: "var(--Neutral-10)",
+                border: "1px solid var(--Neutral-20)",
+                borderRadius: "8px",
+            }),
+            singleValue: (styles) => ({
+                ...styles,
+                color: "var(--Neutral-90)",
+            })
           }}
           defaultValue={selectedOption}
           options={filterOptions}
@@ -131,6 +147,8 @@ export default function SidePanel() {
           <textarea
             className="input-area"
             ref={inputRef}
+            rows={1}
+            placeholder="Type something..."
             onKeyDown={(e) => {
               if (e.key === "Enter" && !e.shiftKey) {
                 e.preventDefault();
@@ -141,17 +159,10 @@ export default function SidePanel() {
             onChange={(e) => setTextInput(e.target.value)}
             value={textInput}
           ></textarea>
-          <span
-            className={cn("input-content-placeholder", {
-              hidden: textInput.length,
-            })}
-          >
-            Type&nbsp;something...
-          </span>
-
           <button
             className="send-button material-symbols-outlined filled"
             onClick={handleSubmit}
+            disabled={!textInput.trim()}
           >
             send
           </button>

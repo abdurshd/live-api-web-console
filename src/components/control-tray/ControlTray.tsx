@@ -83,12 +83,6 @@ function ControlTray({
       connectButtonRef.current.focus();
     }
   }, [connected]);
-  useEffect(() => {
-    document.documentElement.style.setProperty(
-      "--volume",
-      `${Math.max(5, Math.min(inVolume * 200, 8))}px`
-    );
-  }, [inVolume]);
 
   useEffect(() => {
     const onData = (base64: string) => {
@@ -164,7 +158,7 @@ function ControlTray({
       <canvas style={{ display: "none" }} ref={renderCanvasRef} />
       <nav className={cn("actions-nav", { disabled: !connected })}>
         <button
-          className={cn("action-button mic-button")}
+          className={cn("action-button mic-button", { muted })}
           onClick={() => setMuted(!muted)}
         >
           {!muted ? (

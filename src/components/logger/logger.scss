@@ -5,9 +5,10 @@
   display: block;
 
   .logger-list {
-    padding: 0 0px 0 25px;
-    overflow-x: hidden;
-    width: calc(100% - 45px);
+    padding: 0;
+    width: 100%;
+    list-style: none;
+    margin: 0;
   }
 
   .user h4 {
@@ -19,49 +20,67 @@
   }
 
   .rich-log {
-    display: flex;
-    justify-content: center;
-    gap: 4px;
+    display: block;
+    margin-bottom: 16px;
 
     pre {
       overflow-x: auto;
+      margin: 0;
     }
 
-    display: block;
-
     h4 {
-      font-size: 14px;
+      font-size: 12px;
       text-transform: uppercase;
-      padding: 8px 0;
+      padding: 0 0 8px 0;
       margin: 0;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      opacity: 0.8;
     }
 
     h5 {
       margin: 0;
       padding-bottom: 8px;
       border-bottom: 1px solid var(--Neutral-20);
+      font-size: 14px;
+      color: var(--Neutral-90);
     }
 
     .part {
-      background: var(--Neutral-5);
-      padding: 14px;
-      margin-bottom: 4px;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 16px;
+      margin-bottom: 8px;
       color: var(--Neutral-90);
-      border-radius: 8px;
+      border-radius: 12px;
+      border: 1px solid var(--Neutral-15);
+      font-size: 14px;
+      line-height: 1.6;
+      transition: background 0.2s ease;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.05);
+      }
     }
   }
 
   .plain-log {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 4px 0;
+    
     &>* {
-      padding-right: 4px;
+      /* padding-right removed, using gap */
     }
   }
 
   .inline-code:not(:last-child) {
     font-style: italic;
+    color: var(--Neutral-80);
 
     &::after {
       content: ", ";
+      color: var(--Neutral-50);
     }
   }
 }
@@ -69,24 +88,34 @@
 .logger li {
   display: block;
   padding: 8px 0;
-  color: var(--Neutral-50, #707577);
-  font-family: "Space Mono";
-  font-size: 14px;
+  color: var(--Neutral-50);
+  font-family: "Space Mono", monospace;
+  font-size: 13px;
   font-style: normal;
   font-weight: 400;
-  line-height: normal;
+  line-height: 1.5;
+  border-bottom: 1px solid transparent;
+  
+  &:hover {
+    background: linear-gradient(to right, rgba(255,255,255,0.02), transparent);
+  }
 }
 
 .logger li .timestamp {
-  width: 70px;
+  width: 60px;
   flex-grow: 0;
   flex-shrink: 0;
-  color: var(--Neutral-50);
+  color: var(--Neutral-40);
+  font-size: 11px;
 }
 
 .logger li .source {
   flex-shrink: 0;
   font-weight: bold;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  margin-right: 8px;
 }
 
 .logger li.source-server,
@@ -100,17 +129,18 @@
 }
 
 .logger li .count {
-  background-color: var(--Neutral-5);
-  font-size: x-small;
-  padding: 0em 0.6em;
-  padding: 0.3em 0.5em;
-  line-height: 1em;
+  background-color: var(--Neutral-10);
+  font-size: 10px;
+  padding: 2px 6px;
   vertical-align: middle;
-  border-radius: 8px;
+  border-radius: 4px;
   color: var(--Blue-500);
+  margin-left: 8px;
+  border: 1px solid var(--Neutral-20);
 }
 
 .logger li .message {
   flex-grow: 1;
-  color: var(--Neutral-50);
+  color: var(--Neutral-60);
+  word-break: break-word;
 }
