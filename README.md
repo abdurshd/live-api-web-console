@@ -59,7 +59,7 @@ export function Altair() {
 
   useEffect(() => {
     setConfig({
-      model: "models/gemini-2.5-flash-native-audio-preview-09-2025",
+      model: "models/gemini-2.5-flash-native-audio-preview-12-2025",
       systemInstruction: {
         parts: [
           {
